@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TypographyTheme } from "./theme";
+import { TypographyTheme } from "../theme";
 
 const getTypographySizeByType = (type: TypographyTheme["type"]) => {
   switch (type) {
@@ -29,18 +29,24 @@ const isHeader = (type: TypographyTheme["type"]) => {
 const TypographyBlock = styled.p<TypographyTheme>`
   font-size: ${(props) =>
     getTypographySizeByType(props.type) || props.theme.typography.size};
-  color: ${(props) => props.color || props.theme.colors.typography.default};
+  color: ${(props) =>
+    props.color
+      ? props.theme.typography.color[props.color]
+      : props.theme.typography.color.default};
 `;
 
-export const Typogaphy = ({
+export const Typography = ({
   type,
   color,
   children,
 }: TypographyTheme & { children: string }) => {
   if (type && isHeader(type)) {
-    // Type assertion that is needed. No other cases are possible.
+    // Type assertion is needed. No other cases are possible.
     const TypographyHeader = styled[type as "h1" | "h2" | "h3" | "h4"]`
-      color: ${(props) => color || props.theme.colors.typography.default};
+      color: ${(props) =>
+        color
+          ? props.theme.typography.color[color]
+          : props.theme.typography.color.default};
     `;
 
     return <TypographyHeader>{children}</TypographyHeader>;

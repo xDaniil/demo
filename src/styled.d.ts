@@ -11,14 +11,17 @@ declare module "styled-components" {
     typography: {
       size: string;
       weight: string;
+      color: {
+        default: string;
+        secondary: string;
+      };
     };
 
     colors: {
-      typography: {
-        default: string;
-      };
       main: string;
       secondary: string;
+      light: string;
+      accent: string;
     };
 
     button: {
