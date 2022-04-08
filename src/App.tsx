@@ -3,7 +3,6 @@ import { I18nProvider } from "@lingui/react";
 import { observer } from "mobx-react-lite";
 import { Suspense, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { Chart } from "./charts";
 import { Layout } from "./components";
 import { useStore } from "./hooks";
 import { useLingui } from "./hooks/useLingui";

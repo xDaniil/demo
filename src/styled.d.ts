@@ -3,6 +3,8 @@ import "styled-components";
 declare module "styled-components" {
   interface ButtonTheme {
     color: string;
+    hoverColor: string;
+    hoverBackground: string;
   }
 
   export interface DefaultTheme {

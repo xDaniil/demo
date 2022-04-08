@@ -1,5 +1,7 @@
 import { observer } from "mobx-react-lite";
+import { News } from "../../components";
 import { useStore } from "../../hooks";
+import { NewsContainer } from "./styles";
 
 export const NewsPage = observer(() => {
   const {
@@ -7,5 +9,11 @@ export const NewsPage = observer(() => {
   } = useStore();
   console.log(newsArray);
 
-  return <></>;
+  return (
+    <NewsContainer>
+      {newsArray.map((newsItem) => {
+        return <News {...newsItem}></News>;
+      })}
+    </NewsContainer>
+  );
 });

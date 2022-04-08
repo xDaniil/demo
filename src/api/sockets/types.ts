@@ -6,7 +6,7 @@ export type WebSocketMessage = {
     s: ID;
     t: number;
     v: number;
-  };
+  }[];
 };
 
 export enum MessageType {

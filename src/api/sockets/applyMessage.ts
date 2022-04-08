@@ -1,8 +1,23 @@
 import { applyPatch } from "mobx-state-tree";
+import { last } from "ramda";
 import { InstanceRootStoreModel } from "../../store";
 
 import { getPath } from "./getPath";
 import { MessageType, WebSocketMessage } from "./types";
+
+const validateTradeMessage = (item: WebSocketMessage) => {
+  const lastItem = last(item.data);
+
+  if (!lastItem) {
+    return {};
+  }
+
+  return {
+    id: lastItem.s,
+    price: lastItem.p,
+    timestamp: lastItem.t,
+  };
+};
 
 export const applyMessage = (
   message: WebSocketMessage,
@@ -11,15 +26,16 @@ export const applyMessage = (
   try {
     switch (message.type) {
       case MessageType.TRADES: {
-        const item = {
-          ...message.data,
-          id: message.data.s,
-        };
+        const id = last(message.data)?.s;
+
+        if (!id) {
+          return;
+        }
 
         applyPatch(store, {
-          op: store.trades.entries.has(item.id) ? "replace" : "add",
-          path: getPath(MessageType.TRADES, item.id),
-          value: item,
+          op: store.trades.entries.has(id) ? "replace" : "add",
+          path: getPath(MessageType.TRADES, id),
+          value: validateTradeMessage(message),
         });
 
         break;

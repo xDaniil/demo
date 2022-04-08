@@ -17,6 +17,7 @@ const MainArea = styled.div`
   flex-grow: 1;
   background-color: ${(props) => props.theme.colors.main};
   padding: 16px;
+  overflow: scroll;
 `;
 
 type Props = {
