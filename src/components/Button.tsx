@@ -1,18 +1,9 @@
-import { MouseEventHandler, ReactNode } from "react";
+import { MouseEventHandler } from "react";
 import styled from "styled-components";
-import { theme } from "../theme";
 import { Typography } from "./Typography";
 
 type StyledButtonProps = {
   buttonType: "primary" | "secondary" | "ghost";
-};
-
-const getBorderColorByButtonType = (
-  type: "primary" | "secondary" | "ghost"
-) => {
-  if (type === "primary" || type === "ghost") {
-    return theme.colors.accent;
-  }
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
