@@ -1,4 +1,4 @@
-import { WEBSOCKET_BASE_URL } from "../../constants";
+import { WEBSOCKET_BASE_URL, WEBSOCKET_TOKEN } from "../../constants";
 import { InstanceRootStoreModel } from "../../store";
 import { applyMessage } from "./applyMessage";
 import { WebSocketMessage } from "./types";
@@ -7,6 +7,7 @@ let socket: WebSocket | undefined;
 
 export const registerSocket = (
   store: Pick<InstanceRootStoreModel, "trades">,
+  onOpen: (socket: WebSocket) => void,
   onLostConnection?: () => {}
 ) => {
   const newSocket = () => {
@@ -17,7 +18,11 @@ export const registerSocket = (
       socket?.close();
     }
 
-    socket = new WebSocket(WEBSOCKET_BASE_URL);
+    socket = new WebSocket(`${WEBSOCKET_BASE_URL}?token=${WEBSOCKET_TOKEN}`);
+
+    socket.onopen = async (event) => {
+      socket && onOpen(socket);
+    };
 
     socket.onmessage = async (event) => {
       try {

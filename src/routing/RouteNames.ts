@@ -1,4 +1,4 @@
 export enum RouteNames {
-  NEWS = "/news",
+  NEWS = "/",
   TRADES = "/trades",
 }

@@ -1,14 +1,16 @@
 export type WebSocketMessage = {
   id: string;
-  type: number;
-  content: {
-    price: number;
-    ticker: string;
+  type: string;
+  data: {
+    p: number;
+    s: ID;
+    t: number;
+    v: number;
   };
 };
 
 export enum MessageType {
-  TRADES,
+  TRADES = "trade",
 }
 
 export type MSTPath = string;

@@ -17,7 +17,7 @@ const getParentLocale = (locale: string): string => {
   return localeParts.slice(0, localeParts.length - 1).join("-");
 };
 
-export default (): string => {
+export const getBrowserLocale = (): string => {
   const locale = navigator.languages.reduceRight<string>((acc, locale) => {
     const parentLocale = getParentLocale(locale);
 

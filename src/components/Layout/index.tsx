@@ -15,6 +15,8 @@ const Container = styled.div`
 const MainArea = styled.div`
   display: flex;
   flex-grow: 1;
+  background-color: ${(props) => props.theme.colors.main};
+  padding: 16px;
 `;
 
 type Props = {
@@ -26,9 +28,9 @@ export const Layout = ({ children }: Props) => {
 
   return (
     <Container>
-      <Header></Header>
+      <Header />
       <MainArea>{children}</MainArea>
-      <Footer></Footer>
+      <Footer />
     </Container>
   );
 };

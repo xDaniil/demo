@@ -12,8 +12,8 @@ export const applyMessage = (
     switch (message.type) {
       case MessageType.TRADES: {
         const item = {
-          ...message.content,
-          id: message.id,
+          ...message.data,
+          id: message.data.s,
         };
 
         applyPatch(store, {

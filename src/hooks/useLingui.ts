@@ -2,7 +2,7 @@ import { i18n } from "@lingui/core";
 import { CompiledMessage } from "@lingui/core/cjs/i18n";
 import * as pluralsLanguages from "make-plural/plurals";
 import { useEffect, useState } from "react";
-import getBrowserLocale from "../utils/getBrowserLocale";
+import { getBrowserLocale } from "../utils";
 
 type ICatalogs = Record<string, Record<string, CompiledMessage>>;
 const catalogs: ICatalogs = {};
