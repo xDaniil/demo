@@ -1,7 +1,6 @@
-import { useState } from "react";
+import * as d3 from "d3";
 import { useD3 } from "../hooks";
 import { Styles } from "./types";
-import * as d3 from "d3";
 
 type Props = {
   data: any[];
