@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useMemo } from "react";
 import { useParams } from "react-router";
+import { NewsItem } from "../../components/News/NewsItem";
 import { useStore } from "../../hooks";
 import { RouteParams } from "../../routing/RouteNames";
 
@@ -10,9 +11,13 @@ export const NewsItemPage = observer(() => {
   } = useStore();
   const { newsId } = useParams<RouteParams>();
 
-  const selectedNewsItem = useMemo(() => {
+  const { id, title, body, pictureUrl } = useMemo(() => {
     return { ...entries.get(newsId || "") };
   }, [newsId, entries]);
 
-  return <div>{selectedNewsItem.title}</div>;
+  if (!id || !title || !body || !pictureUrl) {
+    return <></>;
+  }
+
+  return <NewsItem id={id} title={title} body={body} pictureUrl={pictureUrl} />;
 });

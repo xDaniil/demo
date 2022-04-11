@@ -5,7 +5,6 @@ import { Header } from "./Header";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -13,11 +12,11 @@ const Container = styled.div`
 `;
 
 const MainArea = styled.div`
-  display: flex;
   flex-grow: 1;
   background-color: ${(props) => props.theme.colors.main};
   padding: 16px;
   overflow: scroll;
+  max-height: calc(100% - 92px);
 `;
 
 export const Layout = () => {

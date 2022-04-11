@@ -8,8 +8,8 @@ import { Button } from "../Button";
 import { Typography } from "../Typography";
 
 const NewsCard = styled.div`
-  max-width: 450px;
-
+  max-width: 500px;
+  flex: 1;
   border-radius: ${(props) => props.theme.borderRadius};
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@ const NewsTitle = styled.div`
 
 const NewsImage = styled.img`
   width: inherit;
-  height: 250px;
+  height: 300px;
   object-fit: cover;
 `;
 
@@ -66,7 +66,7 @@ export const News = ({ body, id, pictureUrl, title }: InstanceNewsModel) => {
             navigate(`${RouteNames.NEWS}/${id}`);
           }}
         >
-          {i18n._(t`Read more`)}
+          {i18n._(t`Continue reading`)}
         </Button>
       </NewsFooter>
     </NewsCard>
