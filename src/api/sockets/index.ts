@@ -12,7 +12,7 @@ export const registerSocket = (
 ) => {
   const newSocket = () => {
     if (
-      socket?.readyState === socket?.OPEN &&
+      socket?.readyState === socket?.OPEN ||
       socket?.readyState === socket?.CONNECTING
     ) {
       socket?.close();

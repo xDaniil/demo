@@ -16,7 +16,7 @@ const MainArea = styled.div`
   background-color: ${(props) => props.theme.colors.main};
   padding: 16px;
   overflow: scroll;
-  max-height: calc(100% - 92px);
+  height: calc(100vh - 92px);
 `;
 
 export const Layout = () => {

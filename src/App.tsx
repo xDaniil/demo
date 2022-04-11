@@ -3,6 +3,7 @@ import { I18nProvider } from "@lingui/react";
 import { observer } from "mobx-react-lite";
 import { Suspense, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
+import { closeSocket } from "./api";
 import { PageLoadingSpinner } from "./components/Spinner";
 import { useStore } from "./hooks";
 import { useLingui } from "./hooks/useLingui";
@@ -24,6 +25,10 @@ const App = observer(() => {
         setInitLoading(false);
       }
     })();
+
+    return () => {
+      closeSocket();
+    };
   }, []);
 
   return (

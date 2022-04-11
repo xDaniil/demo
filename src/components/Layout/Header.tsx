@@ -1,3 +1,5 @@
+import { i18n } from "@lingui/core";
+import { t } from "@lingui/macro";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { RouteNames } from "../../routing/RouteNames";
@@ -36,7 +38,7 @@ export const Header = () => {
           color="secondary"
           type="subtitle"
         >
-          News
+          {i18n._(t`News`)}
         </Typography>
 
         <Typography
@@ -44,7 +46,7 @@ export const Header = () => {
           color="secondary"
           type="subtitle"
         >
-          Trades
+          {i18n._(t`Trades`)}
         </Typography>
       </LinksContainer>
     </HeaderContainer>
