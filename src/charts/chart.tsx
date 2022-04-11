@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useD3 } from "../hooks";
 
 type Props = {
-  data: { items: { timestamp: number; value: number }[] }[];
+  data: { items: { timestamp: number; value: number }[] };
 };
 
 const HEIGHT = 300;
@@ -31,15 +31,15 @@ const ChartContainer = styled.div`
 export const Chart = ({ data }: Props) => {
   const { margin } = DIMENSIONS;
   const timeDomain = d3
-    .extent(data[0].items, (d) => d.timestamp)
+    .extent(data.items, (d) => d.timestamp)
     .map((timestamp) => timestamp || 0);
   const xScale = d3.scaleTime().domain(timeDomain).range([0, WIDTH]);
 
   const yScale = d3
     .scaleLinear()
     .domain([
-      (d3.min(data[0].items, (d) => d.value) || 100) + 100,
-      (d3.max(data[0].items, (d) => d.value) || 100) - 100,
+      d3.min(data.items, (d) => 0.99 * (d.value || 100)) as number,
+      d3.max(data.items, (d) => 1.01 * (d.value || 100)) as number,
     ])
     .range([HEIGHT, 0]);
 
@@ -49,13 +49,30 @@ export const Chart = ({ data }: Props) => {
 
       svg
         .append("rect")
-        .attr("width", WIDTH)
-        .attr("height", HEIGHT)
+        .attr("width", WIDTH + 30)
+        .attr("height", HEIGHT + 30)
         .attr("fill", "black");
 
       const graph = svg
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      const line = d3
+        .line()
+        .x((d) => xScale(d[0]))
+        .y((d) => yScale(d[1]));
+
+      graph
+        .selectAll(".line")
+        .data([data])
+        .enter()
+        .append("path")
+        .attr("fill", "none")
+        .attr("stroke", (d) => "green")
+        .attr("stroke-width", 3)
+        .attr("d", (d) =>
+          line(d.items.map((dItem) => [dItem.timestamp, dItem.value]))
+        );
 
       const xAxis = d3.axisBottom(xScale).ticks(5).tickSize(-HEIGHT);
       const xAxisGroup = graph
@@ -80,28 +97,11 @@ export const Chart = ({ data }: Props) => {
       yAxisGroup.selectAll("line").attr("stroke", "rgba(255, 255, 255, 0.2)");
       yAxisGroup
         .selectAll("text")
-        .attr("opacity", 0.5)
+        .attr("opacity", 1)
         .attr("color", "white")
         .attr("font-size", "0.75rem");
-
-      const line = d3
-        .line()
-        .x((d) => xScale(d[0]))
-        .y((d) => yScale(d[1]));
-
-      graph
-        .selectAll(".line")
-        .data(data)
-        .enter()
-        .append("path")
-        .attr("fill", "none")
-        .attr("stroke", (d) => "green")
-        .attr("stroke-width", 3)
-        .attr("d", (d) =>
-          line(d.items.map((dItem) => [dItem.timestamp, dItem.value]))
-        );
     },
-    [...data]
+    [data]
   );
 
   return (

@@ -34,7 +34,7 @@ export const TradesPage = observer(() => {
           <TradeBlock>
             <Typography type="subtitle">{trade.id}</Typography>
 
-            <Chart data={[trade?.d3DataSource]} />
+            <Chart data={trade?.d3DataSource} />
           </TradeBlock>
         );
       })}
