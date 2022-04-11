@@ -3,7 +3,7 @@ import { I18nProvider } from "@lingui/react";
 import { observer } from "mobx-react-lite";
 import { Suspense, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { Layout } from "./components";
+import { PageLoadingSpinner } from "./components/Spinner";
 import { useStore } from "./hooks";
 import { useLingui } from "./hooks/useLingui";
 import { RoutesProvider } from "./routing";
@@ -26,17 +26,12 @@ const App = observer(() => {
     })();
   }, []);
 
-  if (localeLoading || initLoading) {
-    return <></>;
-  }
-
   return (
     <Suspense fallback={<></>}>
       <I18nProvider i18n={i18n}>
         <ThemeProvider theme={theme}>
-          <Layout>
-            <RoutesProvider />
-          </Layout>
+          {(localeLoading || initLoading) && <PageLoadingSpinner />}
+          {!localeLoading && !initLoading && <RoutesProvider />}
         </ThemeProvider>
       </I18nProvider>
     </Suspense>

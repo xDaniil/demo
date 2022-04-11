@@ -1,9 +1,11 @@
 import { i18n } from "@lingui/core";
-import styled from "styled-components";
-import { InstanceNewsModel } from "../../store/NewsStoreModel";
-import { Typography } from "../Typography";
 import { t } from "@lingui/macro";
+import { useNavigate } from "react-router";
+import styled from "styled-components";
+import { RouteNames } from "../../routing/RouteNames";
+import { InstanceNewsModel } from "../../store/NewsStoreModel";
 import { Button } from "../Button";
+import { Typography } from "../Typography";
 
 const NewsCard = styled.div`
   max-width: 450px;
@@ -42,6 +44,8 @@ const NewsFooter = styled.div`
 `;
 
 export const News = ({ body, id, pictureUrl, title }: InstanceNewsModel) => {
+  const navigate = useNavigate();
+
   return (
     <NewsCard key={id}>
       <NewsTitle>
@@ -59,7 +63,7 @@ export const News = ({ body, id, pictureUrl, title }: InstanceNewsModel) => {
       <NewsFooter>
         <Button
           onClick={() => {
-            console.log("clicked");
+            navigate(`${RouteNames.NEWS}/${id}`);
           }}
         >
           {i18n._(t`Read more`)}

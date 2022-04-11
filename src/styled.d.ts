@@ -14,6 +14,7 @@ declare module "styled-components" {
       size: string;
       weight: string;
       color: {
+        hoverColor: string;
         default: string;
         secondary: string;
       };

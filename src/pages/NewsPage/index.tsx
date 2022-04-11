@@ -7,8 +7,6 @@ export const NewsPage = observer(() => {
   const {
     news: { newsArray },
   } = useStore();
-  console.log(newsArray);
-
   return (
     <NewsContainer>
       {newsArray.map((newsItem) => {

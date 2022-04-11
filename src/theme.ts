@@ -7,6 +7,7 @@ export const theme: DefaultTheme = {
     size: "14px",
     weight: "400",
     color: {
+      hoverColor: "#d9d9d9",
       default: "rgb(33, 33, 33)",
       secondary: "rgb(255, 255, 255)",
     },

@@ -26,7 +26,7 @@ const StyledButton = styled.button<StyledButtonProps>`
 type Props = {
   type?: "primary" | "secondary" | "ghost";
   children: string;
-  onClick: (event: MouseEventHandler<HTMLButtonElement>) => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 const getTypographyColorByButtonType = (
@@ -41,7 +41,7 @@ const getTypographyColorByButtonType = (
 
 export const Button = ({ type = "primary", children, onClick }: Props) => {
   return (
-    <StyledButton buttonType={type}>
+    <StyledButton onClick={onClick} buttonType={type}>
       <Typography type="button" color={getTypographyColorByButtonType(type)}>
         {children}
       </Typography>

@@ -41,6 +41,13 @@ const TypographyBlock = styled.p<TypographyTheme>`
   -webkit-line-clamp: ${(props) => props.clamp};
   -webkit-box-orient: vertical;
   margin: ${(props) => props.type === "button" && "8px"};
+
+  transition: color 0.5s;
+
+  &:hover {
+    cursor: ${(props) => props.onClick && "pointer"};
+    color: ${(props) =>
+      props.onClick && props.color && props.theme.typography.color.hoverColor}
 `;
 
 const formatText = (type: TypographyTheme["type"], text: string) => {
@@ -57,7 +64,11 @@ export const Typography = ({
   children,
   ellipsis = false,
   clamp,
-}: TypographyTheme & { children: string }) => {
+  onClick,
+}: TypographyTheme & {
+  children: string;
+  onClick?: (...props: any) => void;
+}) => {
   if (type && isHeader(type)) {
     // Type assertion is needed. No other cases are possible.
     const TypographyHeader = styled[type as "h1" | "h2" | "h3" | "h4"]`
@@ -80,6 +91,7 @@ export const Typography = ({
       ellipsis={ellipsis}
       type={type}
       color={color}
+      onClick={onClick}
     >
       {formatText(type, children)}
     </TypographyBlock>

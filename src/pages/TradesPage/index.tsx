@@ -6,7 +6,5 @@ export const TradesPage = observer(() => {
     trades: { tradesArray },
   } = useStore();
 
-  console.log(tradesArray);
-
-  return <></>;
+  return <div style={{ width: "100%", background: "red" }}></div>;
 });
