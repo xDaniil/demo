@@ -1,6 +1,6 @@
 # Getting Started with my react demo
 
-This project is deplyed to https://d39i8xwfqin14q.cloudfront.net/
+This project is deployed to https://d39i8xwfqin14q.cloudfront.net/
 
 ## Available Scripts
 
